@@ -131,7 +131,7 @@ export class ObservableQuery extends Observable<ApolloQueryResult> {
     // will not end up hitting the server.
     // See more: https://github.com/apollostack/apollo-client/issues/707
     // Basically: is there a query in flight right now (modolo the next tick)?
-    const loading = (this.options.forceFetch && queryLoading)
+    const loading = ((!this.options.returnPartialData || this.options.forceFetch) && queryLoading)
       || (partial && !this.options.noFetch);
 
     // if there is nothing in the query store, it means this query hasn't fired yet. Therefore the
